@@ -112,7 +112,7 @@ WRTN.prototype.login = function() {
     .method(Connection.Method.POST)
     .execute()
     .body();
-    
+
     if(!JSON.parse(result).data) return JSON.parse(result);
     result = JSON.parse(result).data;
     this.accessToken = result.accessToken;
@@ -121,7 +121,18 @@ WRTN.prototype.login = function() {
 };
 
 WRTN.prototype.isLogin = function() {
-  if(new Date().getTime() > this.accesTokenExpiredAt || !this.accessTokenExpiredAt)
+  let result = Jsoup.connect("https://api.wow.wrtn.ai/user")
+    .header("Content-Type", "application/json")
+    .header("User-Agent", UserAgent)
+    .ignoreHttpErrors(!0)
+    .ignoreContentType(!0)
+    .header("Authorization", "Bearer " + this.accessToken)
+    .method(Connection.Method.GET)
+    .execute()
+    .body();
+  result = JSON.parse(result);
+  Log.i(JSON.stringify(result))
+  if(result.message == "Unauthorized")
     return false;
   return true;
 };
