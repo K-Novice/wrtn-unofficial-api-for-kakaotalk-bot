@@ -131,7 +131,6 @@ WRTN.prototype.isLogin = function() {
     .execute()
     .body();
   result = JSON.parse(result);
-  Log.i(JSON.stringify(result))
   if(result.message == "Unauthorized")
     return false;
   return true;
