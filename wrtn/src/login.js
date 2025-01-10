@@ -170,15 +170,15 @@ WRTN.prototype.WebSiteSummary = function (url) {
   return JSON.parse(result);
 };
 
-WRTN.prototype.TextSummary = function (url) {
+WRTN.prototype.TextSummary = function (text) {
   if(!url) {
-    throw new TypeError("url is required");
+    throw new TypeError("text is required");
     return;
   }
   let result = Jsoup.connect("https://auto-gen.wrtn.ai/summary/generate-summary")
     .requestBody(JSON.stringify({
       "type": "text",
-      "urlOrText": url
+      "urlOrText": text
     }))
     .header("Content-Type", "application/json")
     .header("Accept", "application/json")
