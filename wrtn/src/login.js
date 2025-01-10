@@ -171,7 +171,7 @@ WRTN.prototype.WebSiteSummary = function (url) {
 };
 
 WRTN.prototype.TextSummary = function (text) {
-  if(!url) {
+  if(!text) {
     throw new TypeError("text is required");
     return;
   }
