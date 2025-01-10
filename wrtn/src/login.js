@@ -148,6 +148,50 @@ WRTN.prototype.YoutubeSummary = function (url) {
   return JSON.parse(result);
 };
 
+WRTN.prototype.WebSiteSummary = function (url) {
+  if(!url) {
+    throw new TypeError("url is required");
+    return;
+  }
+  let result = Jsoup.connect("https://auto-gen.wrtn.ai/summary/generate-summary")
+    .requestBody(JSON.stringify({
+      "type": "link",
+      "urlOrText": url
+    }))
+    .header("Content-Type", "application/json")
+    .header("Accept", "application/json")
+    .header("authorization", "Bearer " + this.accessToken)
+    .ignoreHttpErrors(!0)
+    .ignoreContentType(!0)
+    .timeout(0)
+    .method(Connection.Method.POST)
+    .execute()
+    .body();
+  return JSON.parse(result);
+};
+
+WRTN.prototype.TextSummary = function (url) {
+  if(!url) {
+    throw new TypeError("url is required");
+    return;
+  }
+  let result = Jsoup.connect("https://auto-gen.wrtn.ai/summary/generate-summary")
+    .requestBody(JSON.stringify({
+      "type": "text",
+      "urlOrText": url
+    }))
+    .header("Content-Type", "application/json")
+    .header("Accept", "application/json")
+    .header("authorization", "Bearer " + this.accessToken)
+    .ignoreHttpErrors(!0)
+    .ignoreContentType(!0)
+    .timeout(0)
+    .method(Connection.Method.POST)
+    .execute()
+    .body();
+  return JSON.parse(result);
+};
+
 WRTN.prototype.toString = function() {
   return "[object WRTN]";
 };
@@ -208,6 +252,18 @@ WRTN.prototype.YoutubeSummary.prototype.toString = function() {
 };
 WRTN.prototype.YoutubeSummary.toString = function() {
   return "function YoutubeSummary() { [native code for WRTN.YoutubeSummary, arity=1] }";
+};
+WRTN.prototype.WebSiteSummary.prototype.toString = function() {
+  return "function WebSiteSummary() { [native code for WRTN.WebSiteSummary, arity=1] }";
+};
+WRTN.prototype.WebSiteSummary.toString = function() {
+  return "function WebSiteSummary() { [native code for WRTN.WebSiteSummary, arity=1] }";
+};
+WRTN.prototype.TextSummary.prototype.toString = function() {
+  return "function TextSummary() { [native code for WRTN.TextSummary, arity=1] }";
+};
+WRTN.prototype.TextSummary.toString = function() {
+  return "function TextSummary() { [native code for WRTN.TextSummary, arity=1] }";
 };
 
 exports.WRTN = WRTN;
