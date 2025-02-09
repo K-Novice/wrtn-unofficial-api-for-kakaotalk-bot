@@ -1,6 +1,11 @@
 importPackage(Packages.okhttp3);
+importPackage(java.util.concurrent);
 
-let client = new OkHttpClient();
+let client = new OkHttpClient.Builder()
+  .connectTimeout(0, TimeUnit.SECONDS)
+  .readTimeout(0, TimeUnit.SECONDS)
+  .writeTimeout(0, TimeUnit.SECONDS)
+  .build();
 
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0";
 const API = {
@@ -157,8 +162,8 @@ function DeepAI() {
       .addFormDataPart(preference, true) //preference: speed or quality
       .addFormDataPart("genius_preference", genius_preference)
       .addFormDataPart("negative_prompt", negative_prompt)
-      .addFormDataPart("width", width.toString()|| "512") // String, default = 512, 128 ~ 1536
-      .addFormDataPart("height", height.toString || "512") // String, default = 512, 128 ~ 1536
+      .addFormDataPart("width", width.toString() || "512") // String, default = 512, 128 ~ 1536
+      .addFormDataPart("height", height.toString() || "512") // String, default = 512, 128 ~ 1536
       .build()
       
     let request = new Request.Builder()
@@ -262,13 +267,13 @@ function DeepAI() {
 
     doc = doc.select("div[class=\"style-generator-model\"]");
 
-    return new Array(doc.size()).fill().map((_, i) => {
+    return JSON.stringify(new Array(doc.size()).fill().map((_, i) => {
       let data = doc.get(i).select("img")[0].attr("src");
-      return JSON.dtringify({
+      return {
         banner: data,
         name: data.split(/\/|\.jpg/g).slice(-2)[0].replace(/\-thumb$|\-thu/g, "")
-      });
-    });
+      };
+    }))
   };
   
   this.text2img.prototype.toString = function() {
