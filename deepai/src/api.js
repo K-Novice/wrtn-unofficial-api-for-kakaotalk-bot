@@ -264,10 +264,10 @@ function DeepAI() {
 
     return new Array(doc.size()).fill().map((_, i) => {
       let data = doc.get(i).select("img")[0].attr("src");
-      return {
+      return JSON.dtringify({
         banner: data,
         name: data.split(/\/|\.jpg/g).slice(-2)[0].replace(/\-thumb$|\-thu/g, "")
-      };
+      });
     });
   };
   
