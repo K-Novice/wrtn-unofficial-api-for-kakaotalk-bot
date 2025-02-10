@@ -224,7 +224,7 @@ function DeepAI() {
 
     let body = new MultipartBody.Builder()
       .setType(MultipartBody.FORM)
-      .addFormDataPart("chat_style", "chat")
+      .addFormDataPart("chat_style", chat)
       .addFormDataPart("chatHistory", JSON.stringify(chatHistory))
       .build()
       
