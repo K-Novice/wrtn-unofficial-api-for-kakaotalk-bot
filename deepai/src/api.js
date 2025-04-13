@@ -50,7 +50,26 @@ function DeepAI() {
   this.csrftoken = null;
   this.sessionid = null;
   
-  
+  this.tryitApiKey = function() {
+    let request = new Request.Builder()
+      .url("https://deepai.org/chat")
+      .get()
+      .build()
+
+    let body = client.newCall(request)
+      .execute()
+      .body()
+      .string();
+
+    let code = body
+      .split("const tryitApiKey='tryit")[1]
+      .split(")))")[0]
+      .split("t+myrandomstr+'")[1]
+      .slice(0, -1);
+
+    return code;
+  }();
+
   this.isExist = function(email) {
     let body = new MultipartBody.Builder()
       .setType(MultipartBody.FORM)
@@ -152,7 +171,7 @@ function DeepAI() {
 
   this.text2img = function(style, prompt, image_generator_version, use_old_model, preference, genius_preference, negative_prompt, width, height) {
     let myrandomstr = Math.round((Math.random() * 100000000000)) + "";
-    let tryitApiKey = 'tryit-' + myrandomstr + '-' + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myrandomstr + 'suditya_is_a_smelly_hacker')));
+    let tryitApiKey = 'tryit-' + myrandomstr + '-' + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myrandomstr + this.tryitApiKey)));
     
     let body = new MultipartBody.Builder()
       .setType(MultipartBody.FORM)
@@ -220,7 +239,7 @@ function DeepAI() {
   
   this.chat = function(chat_style, chatHistory) {
     let myrandomstr = Math.round((Math.random() * 100000000000)) + "";
-    let tryitApiKey = 'tryit-' + myrandomstr + '-' + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myrandomstr + 'suditya_is_a_smelly_hacker')));
+    let tryitApiKey = 'tryit-' + myrandomstr + '-' + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myhashfunction(API.userAgent + myrandomstr + this.tryitApiKey)));
 
     let body = new MultipartBody.Builder()
       .setType(MultipartBody.FORM)
