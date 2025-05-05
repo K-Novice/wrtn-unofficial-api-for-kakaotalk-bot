@@ -295,6 +295,47 @@ function DeepAI() {
     }))
   };
   
+
+  this.init.prototype.toString = function() {
+    return "function init() { [native code for DeepAI.init, arity=2] }";
+  };
+
+  this.init.toString = function() {
+    return "function init() { [native code for DeepAI.init, arity=2] }";
+  };
+
+  this.register.prototype.toString = function() {
+    return "function register() { [native code for DeepAI.register, arity=0] }";
+  };
+
+  this.register.toString = function() {
+    return "function register() { [native code for DeepAI.register, arity=0] }";
+  };
+
+  this.login.prototype.toString = function() {
+    return "function login() { [native code for DeepAI.login, arity=0] }";
+  };
+
+  this.login.toString = function() {
+    return "function login() { [native code for DeepAI.login, arity=0] }";
+  };
+
+  this.isLogin.prototype.toString = function() {
+    return "function isLogin() { [native code for DeepAI.isLogin, arity=0] }";
+  };
+
+  this.isLogin.toString = function() {
+    return "function isLogin() { [native code for DeepAI.isLogin, arity=0] }";
+  };
+
+  this.isExist.prototype.toString = function() {
+    return "function isExist() { [native code for DeepAI.isExist, arity=1] }";
+  };
+
+  this.isExist.toString = function() {
+    return "function isExist() { [native code for DeepAI.isExist, arity=1] }";
+  };
+
   this.text2img.prototype.toString = function() {
     return "function text2img() { [native code for DeepAI.text2img, arity=9] }";
   };
